@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>アクティビティリスト</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>名称</th>
+				<th>コスト</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Activity1</td>
+				<td>100</td>
+				<td>
+					<a href="./activity/{activityId}">編集</a>
+					<a href="./activity/{activityId}">削除</a>
+				</td>
+			</tr>
+		</table>
+
+		<a href="./activity">新規登録</a>
+
+	</body>
+
+	<a href="/">戻る</a>
+
+</html>
