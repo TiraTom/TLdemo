@@ -29,15 +29,5 @@ public class TLdemoApplication {
 		return mav;
 	}
 
-	@RequestMapping(value="/activities", method=RequestMethod.GET)
-	public ModelAndView ShowAllActivities(ModelAndView mav) {
-		mav.setViewName("Activities");
-		Iterable<Activity> activityList = activityRepository.findAll();
-		mav.addObject("activityList", activityList);
-		return mav;
-	}
-
-
-
 
 }

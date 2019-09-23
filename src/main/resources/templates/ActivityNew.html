@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>暇つぶし案登録</title>
+	</head>
+	<body>
+		<form method="post" action="/activity" th:object="${activity}">
+			<table>
+				<tr>
+					<th>名称</th>
+					<td><input type="text" th:value="${activity.title}" name="title"/>
+				</tr>
+				<tr>
+					<th>コスト</th>
+					<td><input type="number" th:value="${activity.cost}" name="cost"/>
+				</tr>
+			</table>
+			<br>
+			<input type="submit" value="作成" />
+		</form>
+	</body>
+
+	<a href="/activities">戻る</a>
+</html>

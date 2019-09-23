@@ -2,30 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>アクティビティリスト</title>
+		<title>暇つぶし一覧</title>
 	</head>
 	<body>
-		<div id="test">
-			<h3 th:text="${activityList}"> </h3>
-		</div>
-
 		<table>
 			<tr>
 				<th>名称</th>
 				<th>コスト</th>
 				<th></th>
 			</tr>
-			<tr>
-				<td>Activity1</td>
-				<td>100</td>
-				<td>
-					<a href="./activity/{activityId}">編集</a>
-					<a href="./activity/{activityId}">削除</a>
+			<tr th:each="activity: ${activityList}">
+ 				<td th:text="${activity.getTitle()}">ActivityTitle</td>
+				<td th:text="${activity.getCost()}">ActivityCost</td>
+ 				<td>
+ 					<a th:href="@{'/activity/' + ${activity.getId()}}">編集</a>
 				</td>
 			</tr>
 		</table>
 
-		<a href="./activity">新規登録</a>
+		<a href="/activity">暇つぶし新規登録</a>
 
 	</body>
 

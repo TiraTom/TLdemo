@@ -2,26 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>遊び占い</title>
+		<title>暇つぶし</title>
 	</head>
 	<body>
 		<div>
 			<form method="post" th:action="@{/search}">
 				<h3>予算はいくら？</h3>
 				<input type="number" name="budget" />
-				<h3>気分はどう？</h3>
-				<input type="text" name="mood" />
 				<br>
 				<input type="submit" value="このくらい" />
 			</form>
 		</div>
 		<div>
-			<h3>あなたにオススメな活動は・・・</h3>
+			<h3>あなたにオススメな暇つぶしは・・・</h3>
 			<p th:text=${$activityName} />
 			<p>予算・・・</p><p th:text=${$activityCost}/>
 		</div>
 		<div>
-			<a href="/activities">アクティビティリスト一覧へ</a>
+			<a href="/activities">暇つぶし一覧へ</a>
 		</div>
 	</body>
 </html>
