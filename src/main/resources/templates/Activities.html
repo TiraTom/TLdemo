@@ -5,6 +5,11 @@
 		<title>暇つぶし一覧</title>
 	</head>
 	<body>
+		<div th:if="${messages != null}">
+			<div th:each="message: ${messages}">
+					<p th:text="${message}">
+			</div>
+		</div>
 		<table>
 			<tr>
 				<th>名称</th>

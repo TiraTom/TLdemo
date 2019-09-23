@@ -6,17 +6,26 @@
 	</head>
 	<body>
 		<div>
-			<form method="post" th:action="@{/search}">
+			<form method="post" action="activitySearch">
 				<h3>予算はいくら？</h3>
-				<input type="number" name="budget" />
+				<div th:if="${budget != null}">
+					<input type="number" name="budget" th:value="${budget}" required/>
+				</div>
+				<div th:if="${budget == null}">
+					<input type="number" name="budget" required/>
+					<p>円</p>
+				</div>
 				<br>
 				<input type="submit" value="このくらい" />
 			</form>
 		</div>
-		<div>
+		<div th:if="${activity != null}">
 			<h3>あなたにオススメな暇つぶしは・・・</h3>
-			<p th:text=${$activityName} />
-			<p>予算・・・</p><p th:text=${$activityCost}/>
+			<h3 th:text="${activity.getTitle()}" ></h3>
+			<div th:if="${activity.getCost() >= 0}">
+				<h6>予算：</h6>
+				<h6 th:text="${activity.getCost()}" ></h6>
+			</div>
 		</div>
 		<div>
 			<a href="/activities">暇つぶし一覧へ</a>

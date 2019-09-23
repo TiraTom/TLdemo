@@ -10,11 +10,11 @@
 			<table>
 				<tr>
 					<th>名称</th>
-					<td><input type="text" th:value="${activity.getTitle()}" name="title"/>
+					<td><input type="text" th:value="${activity.getTitle()}" name="title" required/>
 				</tr>
 				<tr>
 					<th>コスト</th>
-					<td><input type="number" th:value="${activity.getCost()}" name="cost"/>
+					<td><input type="number" th:value="${activity.getCost()}" name="cost" required/>
 				</tr>
 			</table>
 			<br>

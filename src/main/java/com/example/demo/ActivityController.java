@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.tldemo.constants.Constants;
 import jp.tldemo.repositories.ActivityRepository;
 
 @Controller
@@ -19,6 +22,7 @@ public class ActivityController {
 	@Autowired
 	ActivityRepository repository;
 
+	List<String> messages;
 
 	@RequestMapping(value="/activities", method=RequestMethod.GET)
 	public ModelAndView showAll(ModelAndView mav) {
@@ -41,6 +45,8 @@ public class ActivityController {
 								,@PathVariable(name = "activityId", required = false) Long activityId
 								,@ModelAttribute Activity activity) {
 
+		messages = null;
+
 		Optional<Activity> activityObj = repository.findById(activityId);
 		if (activityObj.isPresent()) {
 			activity = activityObj.get();
@@ -48,7 +54,9 @@ public class ActivityController {
 			mav.addObject("activity", activity);
 		} else {
 			// データが存在しない場合は一覧に遷移する
-			mav.setViewName("Activities");
+			messages.add(Constants.ACTIVITYNOTFOUNDMESSAGE);
+			mav.addObject("messages", messages);
+			return showAll(mav);
 		}
 
 		return mav;
@@ -59,28 +67,40 @@ public class ActivityController {
 	@Transactional(readOnly=false)
 	public ModelAndView delete(ModelAndView mav, @PathVariable("activityId") Long activityId) {
 
+		messages = null;
+
 		// TODO 画面上で削除確認ボタン->削除結果をモーダルで表示
 
 		try {
 			repository.deleteById(activityId);
-			return showAll(mav);
+			messages.add(Constants.DELETESUCCESSMESSAGE);
 		} catch (Exception ex) {
-			return showAll(mav);
 		}
+		mav.addObject("messages", messages);
+		messages.add(Constants.DBERRORMESSAGE);
+		return showAll(mav);
 	}
 
 
 	@RequestMapping(value="/activity", method=RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView upsert(@ModelAttribute Activity activity, ModelAndView mav) {
-		try {
-			repository.saveAndFlush(activity);
-			return showAll(mav);
 
-		} catch (Exception ex) {
-			// TODO DB更新で例外が発生した場合に処理を分ける
-			repository.saveAndFlush(activity);
+		if (activity.getTitle().isBlank()) {
 			return showAll(mav);
 		}
+
+		messages = null;
+
+		try {
+			repository.saveAndFlush(activity);
+			messages = Arrays.asList(Constants.SAVESUCCESSMESSAGE);
+
+		} catch (Exception ex) {
+			messages = Arrays.asList(Constants.DBERRORMESSAGE);
+		}
+
+		mav.addObject("messages", messages);
+		return showAll(mav);
 	}
 }
