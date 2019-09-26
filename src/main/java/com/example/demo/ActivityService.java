@@ -28,7 +28,7 @@ public class ActivityService {
 			if (cheap.isEmpty() && expensive.isEmpty()) {
 				Activity activity = new Activity();
 				activity.setCost(-1);
-				activity.setTitle(Constants.SERACHACTIVITYFAILEDMESSAGE);
+				activity.setTitle(Constants.SERACH_ACTIVITY_FAILED_MESSAGE);
 				return activity;
 			}
 
@@ -47,7 +47,7 @@ public class ActivityService {
 			 if (cost - activityCheapThanCost.getCost() < activityExpensiveThanCost.getCost() - cost) {
 				 return activityCheapThanCost;
 			 } else {
-				 if ((activityExpensiveThanCost.getCost() * Constants.COSTOVERBORDER) <= (activityExpensiveThanCost.getCost() - cost)){
+				 if ((activityExpensiveThanCost.getCost() * Constants.COST_OVER_BORDER) <= (activityExpensiveThanCost.getCost() - cost)){
 					 return activityExpensiveThanCost;
 				 } else {
 					 return activityCheapThanCost;
@@ -57,9 +57,8 @@ public class ActivityService {
 		} catch (Exception ex){
 			Activity activity = new Activity();
 			activity.setCost(-1);
-			activity.setTitle(Constants.DBERRORMESSAGE);
+			activity.setTitle(Constants.DB_ERROR_MESSAGE);
 			return activity;
 		}
 	}
-
 }

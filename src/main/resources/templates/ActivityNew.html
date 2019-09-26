@@ -1,25 +1,35 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script type="text/javascript" src="activity-edit.js"></script>
 		<title>暇つぶし案登録</title>
 	</head>
 	<body>
-		<form method="post" action="/activity" th:object="${activity}">
-			<table>
-				<tr>
-					<th>名称</th>
-					<td><input type="text" th:value="${activity.title}" name="title" required/>
-				</tr>
-				<tr>
-					<th>コスト</th>
-					<td><input type="number" th:value="${activity.cost}" name="cost" required/>
-				</tr>
-			</table>
-			<br>
-			<input type="submit" value="作成" />
-		</form>
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+			<a href="/" class="navbar-brand">暇つぶし探し</a>
+			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
+			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
+		</nav>
+		<div class="container">
+			<form method="post" action="/activity" th:object="${activity}" class="form-group">
+				<table class="table table-striped">
+					<thead class="thead-dark"><tr>
+						<th>名称</th>
+						<th>コスト</th>
+					</tr></thead>
+					<tbody><tr>
+						<td><input type="text" th:value="${activity.title}" name="title" required class="from-control"/>
+						<td><input type="number" th:value="${activity.cost}" name="cost" required class="form-control"/>
+					</tr></tbody>
+				</table>
+				<br>
+				<input type="submit" value="作成" class="btn btn-primary"/>
+			</form>
+		</div>
 	</body>
 
-	<a href="/activities">戻る</a>
+	<a role="button" href="/activities" class="btn btn-light">戻る</a>
 </html>

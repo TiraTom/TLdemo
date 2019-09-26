@@ -54,7 +54,7 @@ public class ActivityController {
 			mav.addObject("activity", activity);
 		} else {
 			// データが存在しない場合は一覧に遷移する
-			messages.add(Constants.ACTIVITYNOTFOUNDMESSAGE);
+			messages.add(Constants.ACTIVITY_NOT_FOUND_MESSAGE);
 			mav.addObject("messages", messages);
 			return showAll(mav);
 		}
@@ -73,11 +73,11 @@ public class ActivityController {
 
 		try {
 			repository.deleteById(activityId);
-			messages.add(Constants.DELETESUCCESSMESSAGE);
+			messages.add(Constants.DELETE_SUCCESS_MESSAGE);
 		} catch (Exception ex) {
+			messages.add(Constants.DB_ERROR_MESSAGE);
 		}
 		mav.addObject("messages", messages);
-		messages.add(Constants.DBERRORMESSAGE);
 		return showAll(mav);
 	}
 
@@ -94,10 +94,10 @@ public class ActivityController {
 
 		try {
 			repository.saveAndFlush(activity);
-			messages = Arrays.asList(Constants.SAVESUCCESSMESSAGE);
+			messages = Arrays.asList(Constants.SAVE_SUCCESS_MESSAGE);
 
 		} catch (Exception ex) {
-			messages = Arrays.asList(Constants.DBERRORMESSAGE);
+			messages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
 		}
 
 		mav.addObject("messages", messages);

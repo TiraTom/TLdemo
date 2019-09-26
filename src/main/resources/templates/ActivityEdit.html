@@ -1,31 +1,39 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script type="text/javascript" src="activity-edit.js"></script>
 		<title>暇つぶし案編集</title>
 	</head>
 	<body>
-		<form method="post" action="/activity" th:object="${activity}">
-			<input type="hidden" name="id" th:value="${activity.getId()}" />
-			<table>
-				<tr>
-					<th>名称</th>
-					<td><input type="text" th:value="${activity.getTitle()}" name="title" required/>
-				</tr>
-				<tr>
-					<th>コスト</th>
-					<td><input type="number" th:value="${activity.getCost()}" name="cost" required/>
-				</tr>
-			</table>
-			<br>
-			<input type="submit" value="更新" />
-		</form>
-		<form method="post" th:action="@{'/activity/' + ${activity.getId()}}">
-			<input type="hidden" name="_method" value="DELETE">
-			<input type="submit" value="削除">
-		</form>
-
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+			<a href="/" class="navbar-brand">暇つぶし探し</a>
+			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
+			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
+		</nav>
+		<div class="container">
+			<form method="post" action="/activity" th:object="${activity}" class="form-group">
+				<input type="hidden" name="id" th:value="${activity.getId()}"/>
+				<table class="table table-striped">
+					<tr class="thead-dark">
+						<th>名称</th>
+						<td><input type="text" th:value="${activity.getTitle()}" name="title" required class="form-control"/>
+					</tr>
+					<tr class="thead-dark">
+						<th>コスト</th>
+						<td><input type="number" th:value="${activity.getCost()}" name="cost" required class="form-control"/>
+					</tr>
+				</table>
+				<br>
+				<input type="submit" value="更新" class="btn btn-primary"/>
+			</form>
+			<form method="post" th:action="@{'/activity/' + ${activity.getId()}}" class="form-group">
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="submit" value="削除" class="btn btn-danger">
+			</form>
+			<a role="button" href="/activities" class="btn btn-light">戻る</a>
+		</div>
 	</body>
-
-	<a href="/activities">戻る</a>
 </html>

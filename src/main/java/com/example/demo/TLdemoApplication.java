@@ -42,7 +42,7 @@ public class TLdemoApplication {
 		} catch (NumberFormatException ex) {
 			activity = new Activity();
 			activity.setCost(-1);
-			activity.setTitle(Constants.ACTIVITYSEARCHCONDITIONNOTVALID);
+			activity.setTitle(Constants.ACTIVITY_SEARCH_CONDITION_INVALID);
 		}
 
 		mav.setViewName("Index");
