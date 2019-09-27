@@ -15,21 +15,20 @@
 		</nav>
 		<div class="container">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
-				<table class="table table-striped">
-					<thead class="thead-dark"><tr>
-						<th>名称</th>
-						<th>コスト</th>
-					</tr></thead>
-					<tbody><tr>
-						<td><input type="text" th:value="${activity.title}" name="title" required class="from-control"/>
+				<table class="table table-bordered">
+					<tr class="thead-dark">
+						<th class="thead-dark">名称</th>
+						<td><input type="text" th:value="${activity.title}" name="title" required class="form-control"/>
+					</tr>
+					<tr class="thead-dark">
+						<th class="thead-dark">コスト</th>
 						<td><input type="number" th:value="${activity.cost}" name="cost" required class="form-control"/>
-					</tr></tbody>
+					</tr>
 				</table>
-				<br>
 				<input type="submit" value="作成" class="btn btn-primary"/>
 			</form>
+			<a role="button" href="/activities" class="btn btn-light">戻る</a>
 		</div>
 	</body>
 
-	<a role="button" href="/activities" class="btn btn-light">戻る</a>
 </html>

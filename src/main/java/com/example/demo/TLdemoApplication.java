@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.tldemo.constants.Constants;
 
@@ -29,8 +30,10 @@ public class TLdemoApplication {
 		return mav;
 	}
 
-	@RequestMapping(value="/activitySearch", method=RequestMethod.POST)
-	public ModelAndView activitySearch(ModelAndView mav, String budget) {
+	@RequestMapping(value="/suggestActivity", method=RequestMethod.POST)
+	public String suggestActivity(ModelAndView mav
+										, String budget
+										, RedirectAttributes redirectAttributes) {
 
 		int budgetInt;
 		Activity activity;
@@ -38,17 +41,16 @@ public class TLdemoApplication {
 		try {
 			budgetInt = Integer.parseInt(budget);
 			activity = activitiService.search(budgetInt);
-			mav.addObject("budget", budgetInt);
+			redirectAttributes.addFlashAttribute("budget", budgetInt);
 		} catch (NumberFormatException ex) {
 			activity = new Activity();
 			activity.setCost(-1);
 			activity.setTitle(Constants.ACTIVITY_SEARCH_CONDITION_INVALID);
 		}
 
-		mav.setViewName("Index");
-		mav.addObject("activity", activity);
+		redirectAttributes.addFlashAttribute("activity", activity);
 
-		return mav;
+		return "redirect:";
 	}
 
 }

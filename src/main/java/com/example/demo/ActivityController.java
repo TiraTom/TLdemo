@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.tldemo.constants.Constants;
 import jp.tldemo.repositories.ActivityRepository;
@@ -43,9 +45,10 @@ public class ActivityController {
 	@RequestMapping(value="/activity/{activityId}", method=RequestMethod.GET)
 	public ModelAndView showEdit(ModelAndView mav
 								,@PathVariable(name = "activityId", required = false) Long activityId
-								,@ModelAttribute Activity activity) {
+								,@ModelAttribute Activity activity
+								, RedirectAttributes redirectAttributes) {
 
-		messages = null;
+		messages = new ArrayList<String>();
 
 		Optional<Activity> activityObj = repository.findById(activityId);
 		if (activityObj.isPresent()) {
@@ -55,7 +58,7 @@ public class ActivityController {
 		} else {
 			// データが存在しない場合は一覧に遷移する
 			messages.add(Constants.ACTIVITY_NOT_FOUND_MESSAGE);
-			mav.addObject("messages", messages);
+			redirectAttributes.addFlashAttribute("messages", messages);
 			return showAll(mav);
 		}
 
@@ -65,9 +68,11 @@ public class ActivityController {
 
 	@RequestMapping(value="/activity/{activityId}", method=RequestMethod.DELETE)
 	@Transactional(readOnly=false)
-	public ModelAndView delete(ModelAndView mav, @PathVariable("activityId") Long activityId) {
+	public ModelAndView delete(ModelAndView mav
+								, @PathVariable("activityId") Long activityId
+								, RedirectAttributes redirectAttributes) {
 
-		messages = null;
+		messages = new ArrayList<String>();
 
 		// TODO 画面上で削除確認ボタン->削除結果をモーダルで表示
 
@@ -77,20 +82,22 @@ public class ActivityController {
 		} catch (Exception ex) {
 			messages.add(Constants.DB_ERROR_MESSAGE);
 		}
-		mav.addObject("messages", messages);
+		redirectAttributes.addFlashAttribute("message", messages);
 		return showAll(mav);
 	}
 
 
 	@RequestMapping(value="/activity", method=RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView upsert(@ModelAttribute Activity activity, ModelAndView mav) {
+	public ModelAndView upsert(@ModelAttribute Activity activity
+								, ModelAndView mav
+								, RedirectAttributes redirectAttributes) {
 
 		if (activity.getTitle().isBlank()) {
 			return showAll(mav);
 		}
 
-		messages = null;
+		messages = new ArrayList<String>();
 
 		try {
 			repository.saveAndFlush(activity);
@@ -100,7 +107,7 @@ public class ActivityController {
 			messages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
 		}
 
-		mav.addObject("messages", messages);
+		redirectAttributes.addFlashAttribute("messages", messages);
 		return showAll(mav);
 	}
 }

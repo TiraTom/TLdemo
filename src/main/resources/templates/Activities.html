@@ -14,7 +14,7 @@
 			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
 		</nav>
 
-		<div class="container">
+		<div class="container w-75">
 			<div th:if="${messages != null}" class="alert">
 				<div th:each="message: ${messages}">
 						<p th:text="${message}">
@@ -30,15 +30,17 @@
 		 	</form>
 			<table class="table table-striped table-bordered">
 				<thead class="thead-dark"><tr>
-					<th>名称</th>
-					<th>コスト</th>
+					<th>名称(Name)</th>
+					<th>コスト(Cost)</th>
 					<th></th>
 				</tr></thead>
 				<tbody><tr th:each="activity: ${activityList}">
 	 				<td th:text="${activity.getTitle()}">ActivityTitle</td>
 	 				<td th:text="${activity.getCost()}">ActivityTitle</td>
 	 				<td>
-	 					<a th:href="@{'/activity/' + ${activity.getId()}}">編集</a>
+	 					<a th:href="@{'/activity/' + ${activity.getId()}}">
+	 						<img src="/image/SimplePencile-1.png" alt="編集">編集
+	 					</a>
 					</td>
 				</tr></tbody>
 			</table>
