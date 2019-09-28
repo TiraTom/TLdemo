@@ -18,7 +18,7 @@ import jp.tldemo.constants.Constants;
 public class TLdemoApplication {
 
 	@Autowired
-	ActivityService activitiService = new ActivityService();
+	ActivityService activityService = new ActivityService();
 
 	public static void main(String[] args) {
 		SpringApplication.run(TLdemoApplication.class, args);
@@ -38,14 +38,20 @@ public class TLdemoApplication {
 		int budgetInt;
 		Activity activity;
 
-		try {
-			budgetInt = Integer.parseInt(budget);
-			activity = activitiService.search(budgetInt);
-			redirectAttributes.addFlashAttribute("budget", budgetInt);
-		} catch (NumberFormatException ex) {
-			activity = new Activity();
-			activity.setCost(-1);
-			activity.setTitle(Constants.ACTIVITY_SEARCH_CONDITION_INVALID);
+		if (budget.isEmpty()) {
+			// 予算入力がない場合は、ランダムに出す
+			activity = activityService.getRandomly();
+
+		} else {
+			try {
+				budgetInt = Integer.parseInt(budget);
+				activity = activityService.search(budgetInt);
+				redirectAttributes.addFlashAttribute("budget", budgetInt);
+			} catch (NumberFormatException ex) {
+				activity = new Activity();
+				activity.setCost(-1);
+				activity.setTitle(Constants.ACTIVITY_SEARCH_CONDITION_INVALID);
+			}
 		}
 
 		redirectAttributes.addFlashAttribute("activity", activity);

@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,5 +63,13 @@ public class ActivityService {
 			activity.setTitle(Constants.DB_ERROR_MESSAGE);
 			return activity;
 		}
+	}
+
+	@Transactional(readOnly=true)
+	public Activity getRandomly() {
+		List<Activity> activities = repository.findAll();
+		Random rand = new Random();
+		int randomIndex = (int) rand.nextInt(activities.size());
+		return activities.get(randomIndex);
 	}
 }
