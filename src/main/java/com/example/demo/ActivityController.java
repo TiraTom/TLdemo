@@ -58,7 +58,7 @@ public class ActivityController {
 		} else {
 			// データが存在しない場合は一覧に遷移する
 			messages.add(Constants.ACTIVITY_NOT_FOUND_MESSAGE);
-			redirectAttributes.addFlashAttribute("messages", messages);
+			mav.addObject("messages", messages);
 			return showAll(mav);
 		}
 
@@ -74,15 +74,13 @@ public class ActivityController {
 
 		messages = new ArrayList<String>();
 
-		// TODO 画面上で削除確認ボタン->削除結果をモーダルで表示
-
 		try {
 			repository.deleteById(activityId);
 			messages.add(Constants.DELETE_SUCCESS_MESSAGE);
 		} catch (Exception ex) {
 			messages.add(Constants.DB_ERROR_MESSAGE);
 		}
-		redirectAttributes.addFlashAttribute("message", messages);
+		mav.addObject("messages", messages);
 		return showAll(mav);
 	}
 
@@ -107,7 +105,7 @@ public class ActivityController {
 			messages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
 		}
 
-		redirectAttributes.addFlashAttribute("messages", messages);
+		mav.addObject("messages", messages);
 		return showAll(mav);
 	}
 }

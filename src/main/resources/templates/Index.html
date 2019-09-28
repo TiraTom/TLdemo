@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script type="text/javascript" src="/js/index.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<title>暇つぶし</title>
 	</head>
 	<body>
@@ -17,10 +18,10 @@
 			<div class="row">
 				<form method="post" action="suggestActivity" class="form-group">
 					<h3>予算はいくら？</h3>
-					<div th:if="${budget != null}">
+					<div th:if="${budget != null}" class="row">
 						<input type="number" name="budget" th:value="${budget}" class="form-control"/><span>円</span>
 					</div>
-					<div th:if="${budget == null}">
+					<div th:if="${budget == null}" class="row">
 						<input type="number" name="budget" class="form-control"/><span>円</span>
 					</div>
 					<br>
@@ -30,6 +31,8 @@
 			<div th:if="${activity != null}">
 				<div class="row">
 					<h3>あなたにオススメな暇つぶしは・・・</h3>
+				</div>
+				<div class="row">
 					<h3 th:text="${activity.getTitle()}" ></h3>
 				</div>
 				<div th:if="${activity.getCost() >= 0}" class="row">
