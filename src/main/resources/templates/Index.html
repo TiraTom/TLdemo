@@ -18,25 +18,23 @@
 			<div class="row">
 				<form method="post" action="suggestActivity" class="form-group">
 					<h3>予算はいくら？</h3>
-					<div th:if="${budget != null}" class="row">
-						<input type="number" name="budget" th:value="${budget}" class="form-control"/><span>円</span>
-					</div>
-					<div th:if="${budget == null}" class="row">
-						<input type="number" name="budget" class="form-control"/><span>円</span>
+ 					<div class="row">
+						<input type="number" name="budget" id="budgetInput" class="form-control"/><span>円</span>
 					</div>
 					<br>
-					<input type="submit" value="このくらい" class="btn btn-primary"/>
+ 					<input type="button" onclick="roulette()" value="このくらい" class="btn btn-primary"/>
 				</form>
 			</div>
-			<div th:if="${activity != null}">
+			<div id="resultDiv" style="visibility:hidden">
 				<div class="row">
 					<h3>あなたにオススメな暇つぶしは・・・</h3>
 				</div>
 				<div class="row">
-					<h3 th:text="${activity.getTitle()}" ></h3>
+					<h3 id="suggestedActivityName"></h3>
+					<div style="visibility:hidden" id="candidateList" th:value="${activityNames}"></div>
 				</div>
-				<div th:if="${activity.getCost() >= 0}" class="row">
-					<h4>予算：<span th:text="${activity.getCost()}" ></span>円</h4>
+				<div class="row">
+					<h4>予算：<span id="suggestedActivityCost"></span>円</h4>
 				</div>
 			</div>
 		</div>

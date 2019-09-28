@@ -7,6 +7,8 @@ public class Constants {
 
 	public static final double COST_OVER_BORDER = 0.3;
 
+	public static final int ROULETTE_CANDIDATE_NUMBER = 8;
+
 	public static final String DB_ERROR_MESSAGE = "ごめんなさい。DBエラーが発生しました。";
 
 	public static final String SAVE_SUCCESS_MESSAGE = "保存しました。";

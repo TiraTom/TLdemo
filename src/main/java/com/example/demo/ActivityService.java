@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -71,5 +73,13 @@ public class ActivityService {
 		Random rand = new Random();
 		int randomIndex = (int) rand.nextInt(activities.size());
 		return activities.get(randomIndex);
+	}
+
+	@Transactional(readOnly=true)
+	public List<String> getNamesForRoulette(int number){
+		List<String> nameList = new ArrayList<>();
+		repository.findAll().forEach(activity -> nameList.add(activity.getTitle()));
+		Collections.shuffle(nameList);
+		return (number <= nameList.size()) ? nameList.subList(0, number) : nameList.subList(0, (nameList.size()));
 	}
 }
