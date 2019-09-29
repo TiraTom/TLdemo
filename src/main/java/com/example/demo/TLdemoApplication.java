@@ -55,7 +55,7 @@ public class TLdemoApplication {
 		} else {
 			try {
 				budgetInt = Integer.parseInt(budget);
-				activity = activityService.search(budgetInt);
+				activity = activityService.searchSuggestion(budgetInt);
 			} catch (NumberFormatException ex) {
 				activity = new Activity();
 				activity.setCost(-1);

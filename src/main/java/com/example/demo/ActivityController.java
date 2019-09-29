@@ -108,4 +108,5 @@ public class ActivityController {
 		mav.addObject("messages", messages);
 		return showAll(mav);
 	}
+
 }

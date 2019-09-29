@@ -9,14 +9,14 @@ function roulette(){
 	var candidateStr = $('#candidateList').attr('value');
 	var candidateList = candidateStr.slice(1, candidateStr.length -1).split(',')
 
-	// 予算欄は、ルーレット中は空にしておく
+	// ルーレット中は、予算欄を空にしておく
 	$('#suggestedActivityCost').text("");
 
 	$("#resultDiv")[0].style.visibility = "visible";
 
 	index = 0;
 
-	rouletteObj = setInterval(function() {
+	rouletteObj = setInterval(function showCandidate() {
 			$('#suggestedActivityName').text(candidateList[index]);
 			if (index < candidateList.length - 1){
 				index++;
@@ -25,7 +25,7 @@ function roulette(){
 			}
       }, 80);
 
-	setTimeout(function(){
+	setTimeout(function sendSuggestActivityAjax(){
 		$.ajax({
 			async: true,
 			url: '/suggestActivityAjax',
@@ -45,7 +45,7 @@ function roulette(){
 			$('#suggestedActivityCost').text('0');
 		});
 
-	}, 2000)
+	}, 1500);   // 最低1.5秒くらいはルーレットを動かしたいのでsetTimeOutを呼び出している
 
 }
 

@@ -19,7 +19,7 @@ public class ActivityService {
 	ActivityRepository repository;
 
 	@Transactional(readOnly=true)
-	public Activity search(int cost) {
+	public Activity searchSuggestion(int cost) {
 
 		Activity activityCheapThanCost;
 		Activity activityExpensiveThanCost;

@@ -6,7 +6,7 @@
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script type="text/javascript" src="/js/activity-edit.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<title>暇つぶし案編集</title>
+		<title>暇つぶし編集</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -14,7 +14,7 @@
 			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
 			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
 		</nav>
-		<div class="container">
+		<div class="container w-50">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
 				<input type="hidden" name="id" th:value="${activity.getId()}"/>
 				<table class="table table-bordered">
