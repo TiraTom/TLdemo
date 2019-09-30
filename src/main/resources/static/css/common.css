@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+
+.globalNavBar {
+	background-color: #004085;
+}
+
+.navbar-brand {
+	color: aliceblue;
+}
+
+.nav-item{
+	color: cornsilk;
+}

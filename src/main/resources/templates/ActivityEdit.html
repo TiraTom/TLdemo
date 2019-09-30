@@ -6,10 +6,11 @@
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script type="text/javascript" src="/js/activity-edit.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link href="static/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
 		<title>暇つぶし編集</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-sm globalNavBar">
 			<a href="/" class="navbar-brand">暇つぶし探し</a>
 			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
 			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
@@ -18,12 +19,12 @@
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
 				<input type="hidden" name="id" th:value="${activity.getId()}"/>
 				<table class="table table-bordered">
-					<tr class="thead-dark">
-						<th>名称</th>
+					<tr>
+						<th class="table-info">名称</th>
 						<td><input type="text" th:value="${activity.getTitle()}" name="title" required class="form-control"/>
 					</tr>
-					<tr class="thead-dark">
-						<th>コスト</th>
+					<tr>
+						<th class="table-info">コスト</th>
 						<td><input type="number" th:value="${activity.getCost()}" name="cost" required class="form-control"/>
 					</tr>
 				</table>
