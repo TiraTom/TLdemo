@@ -16,27 +16,29 @@
 			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
 		</nav>
 		<div class="container">
-			<div class="row">
-				<form method="post" action="suggestActivity" class="form-group">
-					<h3>予算はいくら？</h3>
+			<div class="row justify-content-md-center">
+				<form method="post" action="suggestActivity" class="form-group center">
+					<h3 class="align-center">予算はいくら？</h3>
  					<div class="input-group">
 						<input type="number" name="budget" id="budgetInput" class="form-control"/>
 						<span class="input-group-addon">円</span>
 					</div>
 					<br>
- 					<input type="button" onclick="roulette()" value="このくらい" class="btn btn-primary"/>
+					<div class="align-center">
+	 					<input type="button" onclick="roulette()" value="このくらい" class="btn btn-primary"/>
+					</div>
 				</form>
 			</div>
-			<div id="resultDiv" style="visibility:hidden">
-				<div class="row">
-					<h3>あなたにオススメな暇つぶしは・・・</h3>
+			<div id="resultDiv" style="visibility:hidden" class="justify-content-md-center w-50 align-center ">
+				<div class="row my-3">
+					<h3 class="align-center">オススメな暇つぶしは</h3>
 				</div>
 				<div class="row">
-					<h3 id="suggestedActivityName"></h3>
-					<div style="visibility:hidden" id="candidateList" th:value="${activityNames}"></div>
+					<h2 id="suggestedActivityName" class="align-center"></h2>
+					<div style="visibility:hidden" id="candidateList" th:value="${activityNames}" class="row"></div>
 				</div>
 				<div class="row">
-					<h4>予算：<span id="suggestedActivityCost"></span>円</h4>
+					<h4 class="align-center">予算：<span id="suggestedActivityCost"></span>円</h4>
 				</div>
 			</div>
 		</div>

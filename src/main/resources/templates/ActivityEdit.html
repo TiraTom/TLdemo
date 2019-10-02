@@ -20,11 +20,11 @@
 				<input type="hidden" name="id" th:value="${activity.getId()}"/>
 				<table class="table table-bordered">
 					<tr>
-						<th class="table-info">名称</th>
+						<th class="activity-table-header">名称</th>
 						<td><input type="text" th:value="${activity.getTitle()}" name="title" required class="form-control"/>
 					</tr>
 					<tr>
-						<th class="table-info">コスト</th>
+						<th class="activity-table-header">コスト</th>
 						<td><input type="number" th:value="${activity.getCost()}" name="cost" required class="form-control"/>
 					</tr>
 				</table>

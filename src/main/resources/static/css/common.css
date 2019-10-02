@@ -12,3 +12,18 @@
 .nav-item{
 	color: cornsilk;
 }
+
+.container {
+	margin-top: 1em;
+}
+
+.activity-table-header {
+	background-color: #b3d7ff;
+}
+
+
+.align-center {
+	margin: auto;
+	text-align: center;
+}
+
