@@ -17,9 +17,14 @@
 		</nav>
 
 		<div class="container w-75">
-			<div th:if="${messages != null}" class="alert">
-				<div th:each="message: ${messages}">
-						<p th:text="${message}">
+			<div th:if="${infoMessages != null}" class="alert alert-info" role="alert">
+				<div th:each="infoMessage: ${infoMessages}">
+						<span th:text="${infoMessage}"></span>
+				</div>
+			</div>
+			<div th:if="${errorMessages != null}" class="alert alert-warning" role="alert">
+				<div th:each="errMessage: ${errorMessages}">
+						<span th:text="${errMessage}"></span>
 				</div>
 			</div>
 <!-- 			<form method="post" action="/search" class="form-group">

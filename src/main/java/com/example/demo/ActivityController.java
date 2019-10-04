@@ -24,7 +24,8 @@ public class ActivityController {
 	@Autowired
 	ActivityRepository repository;
 
-	List<String> messages;
+	List<String> infoMessages;
+	List<String> errorMessages;
 
 	@RequestMapping(value="/activities", method=RequestMethod.GET)
 	public ModelAndView showAll(ModelAndView mav) {
@@ -48,7 +49,9 @@ public class ActivityController {
 								,@ModelAttribute Activity activity
 								, RedirectAttributes redirectAttributes) {
 
-		messages = new ArrayList<String>();
+		// activities画面に渡すメッセージリストの初期化
+		infoMessages = new ArrayList<String>();
+		errorMessages = new ArrayList<String>();
 
 		Optional<Activity> activityObj = repository.findById(activityId);
 		if (activityObj.isPresent()) {
@@ -57,8 +60,8 @@ public class ActivityController {
 			mav.addObject("activity", activity);
 		} else {
 			// データが存在しない場合は一覧に遷移する
-			messages.add(Constants.ACTIVITY_NOT_FOUND_MESSAGE);
-			mav.addObject("messages", messages);
+			infoMessages.add(Constants.ACTIVITY_NOT_FOUND_MESSAGE);
+			mav.addObject("errorMessages", errorMessages);
 			return showAll(mav);
 		}
 
@@ -72,15 +75,18 @@ public class ActivityController {
 								, @PathVariable("activityId") Long activityId
 								, RedirectAttributes redirectAttributes) {
 
-		messages = new ArrayList<String>();
+		// activities画面に渡すメッセージリストの初期化
+		infoMessages = new ArrayList<String>();
+		errorMessages = new ArrayList<String>();
 
 		try {
 			repository.deleteById(activityId);
-			messages.add(Constants.DELETE_SUCCESS_MESSAGE);
+			infoMessages.add(Constants.DELETE_SUCCESS_MESSAGE);
+			mav.addObject("infoMessages", infoMessages);
 		} catch (Exception ex) {
-			messages.add(Constants.DB_ERROR_MESSAGE);
+			infoMessages.add(Constants.DB_ERROR_MESSAGE);
+			mav.addObject("errorMessages", errorMessages);
 		}
-		mav.addObject("messages", messages);
 		return showAll(mav);
 	}
 
@@ -95,17 +101,20 @@ public class ActivityController {
 			return showAll(mav);
 		}
 
-		messages = new ArrayList<String>();
+		// activities画面に渡すメッセージリストの初期化
+		infoMessages = new ArrayList<String>();
+		errorMessages = new ArrayList<String>();
 
 		try {
 			repository.saveAndFlush(activity);
-			messages = Arrays.asList(Constants.SAVE_SUCCESS_MESSAGE);
+			infoMessages = Arrays.asList(Constants.SAVE_SUCCESS_MESSAGE);
+			mav.addObject("infoMessages", infoMessages);
 
 		} catch (Exception ex) {
-			messages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
+			infoMessages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
+			mav.addObject("errorMessages", errorMessages);
 		}
 
-		mav.addObject("messages", messages);
 		return showAll(mav);
 	}
 
