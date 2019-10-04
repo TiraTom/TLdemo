@@ -19,11 +19,11 @@
 				<table class="table table-bordered">
 					<tr>
 						<th class="activity-table-header">名称</th>
-						<td><input type="text" th:value="${activity.title}" name="title" required class="form-control"/>
+						<td><input type="text" th:value="${activity.title}" name="title" maxlength="30" required class="form-control"/>
 					</tr>
 					<tr>
 						<th class="activity-table-header">コスト</th>
-						<td><input type="number" th:value="${activity.cost}" name="cost" required class="form-control"/>
+						<td><input type="number" th:value="${activity.cost}" name="cost" maxlength="10" required class="form-control"/>
 					</tr>
 				</table>
 				<input type="submit" value="登録" class="btn btn-primary"/>

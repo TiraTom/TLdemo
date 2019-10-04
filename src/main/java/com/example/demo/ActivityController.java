@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,17 +95,31 @@ public class ActivityController {
 
 	@RequestMapping(value="/activity", method=RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView upsert(@ModelAttribute Activity activity
+	public ModelAndView upsert(@ModelAttribute @Validated Activity activity
 								, ModelAndView mav
+								, BindingResult result
 								, RedirectAttributes redirectAttributes) {
-
-		if (activity.getTitle().isBlank()) {
-			return showAll(mav);
-		}
 
 		// activities画面に渡すメッセージリストの初期化
 		infoMessages = new ArrayList<String>();
 		errorMessages = new ArrayList<String>();
+
+		if (result.hasErrors()) {
+			infoMessages = Arrays.asList(Constants.VALIDATION_ERROR);
+			// TODO エラーごとにメッセージを出し分ける（SpringBootの機能を利用する）
+			infoMessages = Arrays.asList(Constants.VALIDATION_ERROR_TITLE_LENGTH);
+			infoMessages = Arrays.asList(Constants.VALIDATION_ERROR_COST);
+			mav.addObject("errorMessages", errorMessages);
+
+			mav.setViewName("redirect://");
+			return mav;
+
+		}
+
+
+		if (activity.getTitle().isBlank()) {
+			return showAll(mav);
+		}
 
 		try {
 			repository.saveAndFlush(activity);

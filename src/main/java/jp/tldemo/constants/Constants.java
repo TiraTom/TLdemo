@@ -21,5 +21,9 @@ public class Constants {
 
 	public static final String ACTIVITY_SEARCH_CONDITION_INVALID = "整数値を入力してくれたら、おすすめ暇つぶしを提案します";
 
+	public static final String VALIDATION_ERROR = "入力値が適切ではありません";
 
+	public static final String VALIDATION_ERROR_TITLE_LENGTH = "タイトルは1~30文字の長さで入力して下さい";
+
+	public static final String VALIDATION_ERROR_COST = "費用は0~999,999,999の範囲で入力して下さい";
 }
