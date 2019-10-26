@@ -9,11 +9,8 @@
 		<title>暇つぶし登録</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-sm globalNavBar">
-			<a href="/" class="navbar-brand">暇つぶし探し</a>
-			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
-			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
-		</nav>
+		<div th:include="Header :: common-header">
+		</div>
 		<div class="container w-50">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
 				<table class="table table-bordered">

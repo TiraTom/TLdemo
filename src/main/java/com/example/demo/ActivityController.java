@@ -89,7 +89,13 @@ public class ActivityController {
 			infoMessages.add(Constants.DB_ERROR_MESSAGE);
 			mav.addObject("errorMessages", errorMessages);
 		}
+
 		return showAll(mav);
+
+		// TODO: return 方法の見直し
+		// 以下だと、infoMessageがクエリパラメータになる
+//		mav.setViewName("redirect:/activities");
+//		return mav;
 	}
 
 
@@ -113,9 +119,7 @@ public class ActivityController {
 
 			mav.setViewName("redirect://");
 			return mav;
-
 		}
-
 
 		if (activity.getTitle().isBlank()) {
 			return showAll(mav);
@@ -132,6 +136,10 @@ public class ActivityController {
 		}
 
 		return showAll(mav);
+
+		// TODO: activities二杯くんだけどinfoMessageがクエリパラメータになってメッセージちゃんと出ない
+		// mav.setViewName("redirect:/activities");
+		// return mav;
 	}
 
 }

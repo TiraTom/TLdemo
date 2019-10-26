@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="static/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
+	<title>Header Part</title>
+</head>
+<body>
+	<div th:fragment="common-header">
+		<nav class="navbar navbar-expand-sm globalNavBar">
+			<a href="/" class="navbar-brand">暇つぶし探し</a>
+			<a href="/activities" class="nav-item nav-link">暇つぶし編集</a>
+			<a href="/activity" class="nav-item nav-link">暇つぶし登録</a>
+		</nav>
+	</div>
+</body>
+</html>
