@@ -10,8 +10,7 @@
 		<title>暇つぶし一覧</title>
 	</head>
 	<body>
-		<div th:include="Header :: common-header">
-		</div>
+		<div th:include="PartTemplate :: common-header"></div>
 		<div class="container w-75">
 			<div th:if="${infoMessages != null}" class="alert alert-info" role="alert">
 				<div th:each="infoMessage: ${infoMessages}">

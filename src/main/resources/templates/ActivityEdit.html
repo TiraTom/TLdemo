@@ -10,21 +10,11 @@
 		<title>暇つぶし編集</title>
 	</head>
 	<body>
-		<div th:include="Header :: common-header">
-		</div>
+		<div th:include="PartTemplate :: common-header"></div>
 		<div class="container w-50">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
 				<input type="hidden" name="id" th:value="${activity.getId()}"/>
-				<table class="table table-bordered">
-					<tr>
-						<th class="activity-table-header">名称</th>
-						<td><input type="text" th:value="${activity.getTitle()}" maxlength="30" name="title" required class="form-control"/>
-					</tr>
-					<tr>
-						<th class="activity-table-header">コスト</th>
-						<td><input type="number" th:value="${activity.getCost()}" maxlength="10" name="cost" required class="form-control"/>
-					</tr>
-				</table>
+				<div th:include="PartTemplate :: activity-form" ></div>
 				<br>
 				<input type="submit" value="更新" class="btn btn-primary"/>
 			</form>

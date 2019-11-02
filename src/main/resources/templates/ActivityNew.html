@@ -9,21 +9,11 @@
 		<title>暇つぶし登録</title>
 	</head>
 	<body>
-		<div th:include="Header :: common-header">
-		</div>
+		<div th:include="PartTemplate :: common-header"></div>
 		<div class="container w-50">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
-				<table class="table table-bordered">
-					<tr>
-						<th class="activity-table-header">名称</th>
-						<td><input type="text" th:value="${activity.title}" name="title" maxlength="30" required class="form-control"/>
-					</tr>
-					<tr>
-						<th class="activity-table-header">コスト</th>
-						<td><input type="number" th:value="${activity.cost}" name="cost" maxlength="10" required class="form-control"/>
-					</tr>
-				</table>
-				<input type="submit" value="登録" class="btn btn-primary"/>
+				<div th:include="PartTemplate :: activity-form" ></div>
+ 				<input type="submit" value="登録" class="btn btn-primary"/>
 			</form>
 			<a role="button" href="/activities" class="btn btn-light">戻る</a>
 		</div>
