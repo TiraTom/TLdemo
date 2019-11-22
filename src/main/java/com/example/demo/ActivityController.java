@@ -84,26 +84,21 @@ public class ActivityController {
 		try {
 			repository.deleteById(activityId);
 			infoMessages.add(Constants.DELETE_SUCCESS_MESSAGE);
-			mav.addObject("infoMessages", infoMessages);
+			redirectAttributes.addFlashAttribute("infoMessages", infoMessages);
 		} catch (Exception ex) {
 			infoMessages.add(Constants.DB_ERROR_MESSAGE);
-			mav.addObject("errorMessages", errorMessages);
+			redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
 		}
 
-		return showAll(mav);
-
-		// TODO: return 方法の見直し
-		// 以下だと、infoMessageがクエリパラメータになる
-//		mav.setViewName("redirect:/activities");
-//		return mav;
+		mav.setViewName("redirect:/activities");
+		return mav;
 	}
-
 
 	@RequestMapping(value="/activity", method=RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView upsert(@ModelAttribute @Validated Activity activity
-								, ModelAndView mav
+	public ModelAndView upsert(@ModelAttribute("activity") @Validated Activity activity
 								, BindingResult result
+								, ModelAndView mav
 								, RedirectAttributes redirectAttributes) {
 
 		// activities画面に渡すメッセージリストの初期化
@@ -115,9 +110,11 @@ public class ActivityController {
 			// TODO エラーごとにメッセージを出し分ける（SpringBootの機能を利用する）
 			infoMessages = Arrays.asList(Constants.VALIDATION_ERROR_TITLE_LENGTH);
 			infoMessages = Arrays.asList(Constants.VALIDATION_ERROR_COST);
-			mav.addObject("errorMessages", errorMessages);
 
-			mav.setViewName("redirect://");
+			mav.addObject("infoMessages", infoMessages);
+			mav.setViewName("ActivityNew");
+
+			// TODO メッセージが出ずにコストがリセットされる
 			return mav;
 		}
 
@@ -128,18 +125,15 @@ public class ActivityController {
 		try {
 			repository.saveAndFlush(activity);
 			infoMessages = Arrays.asList(Constants.SAVE_SUCCESS_MESSAGE);
-			mav.addObject("infoMessages", infoMessages);
+			redirectAttributes.addFlashAttribute("infoMessages", infoMessages);
 
 		} catch (Exception ex) {
 			infoMessages = Arrays.asList(Constants.DB_ERROR_MESSAGE);
-			mav.addObject("errorMessages", errorMessages);
+			redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
 		}
 
-		return showAll(mav);
-
-		// TODO: activities二杯くんだけどinfoMessageがクエリパラメータになってメッセージちゃんと出ない
-		// mav.setViewName("redirect:/activities");
-		// return mav;
+		mav.setViewName("redirect:/activities");
+		return mav;
 	}
 
 }

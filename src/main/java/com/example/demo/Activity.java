@@ -11,6 +11,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import jp.tldemo.constants.Constants;
+
 
 @Entity
 @Table(name="activities")
@@ -22,13 +24,13 @@ public class Activity {
 	private Long id;
 
 	@Column
-	@Max(999999999)
-	@Min(0)
+	@Max(value=999999999, message=Constants.VALIDATION_ERROR_COST)
+	@Min(value=0, message=Constants.VALIDATION_ERROR_COST)
 	private int cost;
 
 	@Column
 	@NotEmpty
-	@Size(min=1, max=30)
+	@Size(min=1, max=30, message=Constants.VALIDATION_ERROR_TITLE_LENGTH)
 	private String title;
 
 	public Activity() {

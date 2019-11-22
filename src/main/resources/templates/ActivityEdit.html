@@ -13,6 +13,9 @@
 		<div th:include="PartTemplate :: common-header"></div>
 		<div class="container w-50">
 			<form method="post" action="/activity" th:object="${activity}" class="form-group">
+				<ul>
+					<li th:each="error : ${#fields.detailedErrors()}" class="err" th:text=${error.message} />
+				</ul>
 				<input type="hidden" name="id" th:value="${activity.getId()}"/>
 				<div th:include="PartTemplate :: activity-form" ></div>
 				<br>
